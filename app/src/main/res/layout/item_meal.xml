@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.alexeykatsuro.piggybank.utils.Utils" />
+
+        <variable
+            name="item"
+            type="com.alexeykatsuro.piggybank.data.entries.MealEntry" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_mealtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_screen_margin"
+            android:layout_marginTop="@dimen/vertical_screen_margin_half"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{Utils.toDateString(item.mealtime)}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="22.04 14:01" />
+
+        <TextView
+            android:id="@+id/text_amount_national"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_screen_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{Utils.toCoins(item.amountForeign) + ` BYN`}"
+            app:layout_constraintTop_toBottomOf="@id/text_mealtime"
+            tools:text="408 BYN" />
+
+        <TextView
+            android:id="@+id/text_amount_foreign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_screen_margin_half"
+            android:layout_marginEnd="@dimen/horizontal_screen_margin"
+            android:layout_marginBottom="@dimen/vertical_screen_margin_half"
+            android:text="@{Utils.toCoins(item.amountForeign) + ` ` +  item.currency.name()}"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="200 USD" />
+
+        <TextView
+            android:id="@+id/text_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/horizontal_screen_margin"
+            android:layout_marginBottom="@dimen/vertical_screen_margin_half"
+            android:text="@{Utils.toCoins(item.rate)}"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_amount_foreign"
+            tools:text="2.04" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

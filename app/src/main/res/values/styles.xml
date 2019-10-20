@@ -1,0 +1,56 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.PiggyBank" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
+
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="toolbarStyle">@style/Widget.PiggyBank.Toolbar</item>
+        <item name="appBarLayoutStyle">@style/Widget.PiggyBank.AppBarLayout</item>
+        <item name="textInputStyle">@style/Widget.PiggyBank.TextInputLayout.OutlinedBox</item>
+    </style>
+
+    <style name="Theme.PiggyBank.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ThemeOverlay.PiggyBank.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ThemeOverlay.PiggyBank.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Widget.PiggyBank" parent="@android:style/Widget" />
+
+    <style name="Widget.PiggyBank.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense" />
+    <style name="Widget.PiggyBank.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />
+
+    <style name="Widget.PiggyBank.Button" parent="Widget.MaterialComponents.Button" />
+    <style name="Widget.PiggyBank.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton" />
+    <style name="Widget.PiggyBank.Button.UnelevatedButton" parent="Widget.MaterialComponents.Button.UnelevatedButton" />
+
+
+    <style name="Widget.PiggyBank.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+        <item name="android:theme">@style/ThemeOverlay.PiggyBank.AppBarOverlay</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.PiggyBank.PopupOverlay</item>
+    </style>
+
+    <style name="Widget.PiggyBank.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+    </style>
+
+    <style name="Widget.PiggyBank.Switch" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorPrimaryDark">?colorSecondaryVariant</item>
+        <item name="colorAccent">?attr/colorSecondary</item>
+    </style>
+
+    <style name="Widget.PiggyBank.HorizontalLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/gray_divider</item>
+    </style>
+
+
+</resources>

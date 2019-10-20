@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PiggyBank</string>
+
+    <string name="feeder_title">Кормилка</string>
+    <string name="feeder_usd_amount">USD</string>
+    <string name="feeder_byn_amount">BYN</string>
+    <string name="feeder_rate_usd_to_byn">Курс 1 USD</string>
+    <string name="feeder_date">Время кормления</string>
+    <string name="feeder_feed">Покормить</string>
+
+    <string name="history_title">История кормежки</string>
+    <string name="history_feed">Кормить</string>
+
+    <string name="home_current_rate">Тукущий курс</string>
+    <string name="home_nav_feed">Кормить</string>
+    <string name="home_nav_history">История</string>
+
+
+</resources>
