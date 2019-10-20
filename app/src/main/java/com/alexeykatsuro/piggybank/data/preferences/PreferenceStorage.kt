@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import drewhamilton.preferoutines.getFloatFlow
+import kotlinx.coroutines.flow.Flow
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -12,6 +14,7 @@ import kotlin.reflect.KProperty
  */
 interface PreferenceStorage {
     var currentRate: Float
+    val currentRateObserve: Flow<Float>
 }
 
 /**
@@ -23,6 +26,8 @@ class SharedPreferenceStorage constructor(context: Context) : PreferenceStorage 
 
 
     override var currentRate by FloatPreference(prefs, PREFS_CURRENT_RATE, 0.0f)
+    @Suppress("EXPERIMENTAL_API_USAGE")
+    override val currentRateObserve: Flow<Float> = prefs.getFloatFlow(PREFS_CURRENT_RATE, 0.0f)
 
     companion object {
         const val PREFS_NAME = "PiggyBank"
@@ -43,7 +48,7 @@ class BooleanPreference(
     }
 
     override fun setValue(thisRef: Any, property: KProperty<*>, value: Boolean) {
-        preferences.edit { putBoolean(name, value) }
+        preferences.edit(commit) { putBoolean(name, value) }
     }
 }
 

@@ -9,6 +9,7 @@ import com.alexeykatsuro.piggybank.data.entities.Currency
 import com.alexeykatsuro.piggybank.data.entries.MealEntry
 import com.alexeykatsuro.piggybank.databinding.FragmentFeederBinding
 import com.alexeykatsuro.piggybank.ui.base.PiggyBankFragment
+import com.alexeykatsuro.piggybank.utils.text
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -41,8 +42,8 @@ class FeederFragment : PiggyBankFragment() {
     }
 
     private fun assembleMeal(): MealEntry {
-        val amount = binding.inputAmountForeign.editText!!.toString().toFloatOrNull() ?: 0f
-        val rate = binding.inputRate!!.toString().toFloatOrNull() ?: 0f
+        val amount = binding.inputAmountForeign.text.toFloat()
+        val rate = binding.inputRate.text.toFloat()
 
         return MealEntry(
             amountForeign = amount,

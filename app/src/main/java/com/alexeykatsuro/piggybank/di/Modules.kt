@@ -27,7 +27,7 @@ val appModule = module {
         Room.databaseBuilder(
             get(),
             PiggyBankDatabase::class.java,
-            PiggyBankDatabase::class.java.name
+            "PiggyBankDatabase"
         ).build()
     }
 }

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MealDao : BaseDao<MealEntry> {
 
-    @Query("SELECT * FROM meal")
+    @Query("SELECT * FROM meal ORDER BY mealtime DESC")
     fun getAllObserve(): Flow<List<MealEntry>>
 
     @Query("SELECT SUM(amount_foreign) FROM meal")

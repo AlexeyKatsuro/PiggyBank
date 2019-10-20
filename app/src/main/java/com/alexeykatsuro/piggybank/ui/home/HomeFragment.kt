@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.alexeykatsuro.piggybank.R
 import com.alexeykatsuro.piggybank.databinding.FragmentHomeBinding
 import com.alexeykatsuro.piggybank.ui.base.PiggyBankFragment
+import com.alexeykatsuro.piggybank.utils.onPaddingTextChanged
 import com.alexeykatsuro.piggybank.utils.text
 import com.alexeykatsuro.piggybank.utils.toCoins
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,9 +33,16 @@ class HomeFragment : PiggyBankFragment() {
             }
 
             inputRate.setEndIconOnClickListener {
-                val rate = inputRate.editText!!.text.toString().toFloatOrNull() ?: 0.0f
+                val rate = inputRate.text.toFloat()
                 viewModel.updateRate(rate)
             }
+
+            inputRate.onPaddingTextChanged(1500) {
+                val rate = it.toFloatOrNull()
+                if (rate != null)
+                    viewModel.updateRate(rate)
+            }
+
         }
         return binding.root
     }
@@ -43,11 +51,13 @@ class HomeFragment : PiggyBankFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.profit.observe(viewLifecycleOwner, Observer {
-            binding.profit.text = it.toString()
+            binding.profit.text = it.toCoins()
         })
 
         viewModel.rate.observe(viewLifecycleOwner, Observer {
-            binding.inputRate.text = it.toCoins()
+            if (binding.inputRate.text.toFloatOrNull() != it) {
+                binding.inputRate.text = it.toCoins()
+            }
         })
     }
 }

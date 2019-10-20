@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.alexeykatsuro.piggybank.data.preferences.PreferenceStorage
 import com.alexeykatsuro.piggybank.data.repository.MealRepository
 import com.alexeykatsuro.piggybank.ui.base.PiggyBankViewModel
+import com.alexeykatsuro.piggybank.utils.toLiveData
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -24,27 +26,27 @@ class HomeViewModel(
 
     init {
         viewModelScope.launch {
-            mealRepository.totalAmountNationalObserve().collect { national ->
-                val foreign = mealRepository.totalAmountForeign()
-                val rate = preference.currentRate
-                _profit.value = calculateProfit(national,foreign, rate)
+            val nationalFlow = mealRepository.totalAmountNationalObserve()
+            val foreignFlow = mealRepository.totalAmountForeignObserve()
+            val rateFlow = preference.currentRateObserve
+
+            @Suppress("EXPERIMENTAL_API_USAGE")
+            combine(nationalFlow, foreignFlow, rateFlow) { national, foreign, rate ->
+                calculateProfit(national, foreign, rate)
+            }.toLiveData(_profit)
+        }
+        viewModelScope.launch {
+            preference.currentRateObserve.collect {
+                _rate.value = it
             }
         }
-        viewModelScope.launch {
-            _rate.value = preference.currentRate
-        }
     }
 
-    private fun calculateProfit(amountNational:Float,amountForeign:Float, rate:Float): Float {
-        return amountForeign*rate - amountNational
+    private fun calculateProfit(amountNational: Float, amountForeign: Float, rate: Float): Float {
+        return amountForeign * rate - amountNational
     }
 
-    fun updateRate(rate: Float){
-        viewModelScope.launch {
-            preference.currentRate = rate
-            val foreign = mealRepository.totalAmountForeign()
-            val national = mealRepository.totalAmountNational()
-            _profit.value = calculateProfit(national,foreign, rate)
-        }
+    fun updateRate(rate: Float) {
+        preference.currentRate = rate
     }
 }

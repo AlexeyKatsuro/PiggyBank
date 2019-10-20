@@ -48,9 +48,6 @@ class HistoryFragment : PiggyBankFragment() {
         }
 
         viewModel.history.observe(viewLifecycleOwner, Observer {
-            it.forEach {
-                Timber.e("$it")
-            }
             dataSource.simpleSet(it, MealEntry::id)
             dataSource.set(it)
         })
